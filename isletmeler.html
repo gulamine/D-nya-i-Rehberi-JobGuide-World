@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>İşletmeler</title>
+
+<style>
+body{
+    font-family:Arial;
+    margin:0;
+    background:#f5f5f5;
+}
+
+nav{
+    background:black;
+    color:white;
+    padding:15px;
+}
+
+nav a{
+    color:white;
+    margin-right:15px;
+    text-decoration:none;
+}
+
+.controls{
+    padding:20px;
+    text-align:center;
+}
+
+input, select{
+    padding:10px;
+    margin:10px;
+    width:200px;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(250px,1fr));
+    gap:20px;
+    padding:20px;
+}
+
+.card{
+    background:white;
+    padding:15px;
+    border-radius:10px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:scale(1.05);
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <a href="index.html">Ana Sayfa</a>
+    <a href="isletmeler.html">İşletmeler</a>
+    <a href="#">Reklam Ver</a>
+     <a href="bilboardPanel.html">bilboardPanel/</a>
+    <a href="#">İletişim</a>
+</nav>
+
+<div class="controls">
+    <input type="text" id="search" placeholder="İşletme ara...">
+    
+    <select id="category">
+        <option value="">Tüm Kategoriler</option>
+        <option value="Restoran">Restoran</option>
+        <option value="Kuaför">Kuaför</option>
+        <option value="Emlak">Emlak</option>
+        <option value="Otel">Otel</option>
+        <option value="Tekne">Tekne</option>
+        <option value="Kafe">Kafe</option>
+        <option value="insaat">işaat</option>
+        
+
+    </select>
+</div>
+
+<div class="cards" id="cards"></div>
+
+<script>
+const isletmeler = [
+    {
+        isim:"Ali Kuaför",
+        kategori:"Kuaför",
+        aciklama:"Saç kesimi ve bakım",
+        link:"https://example.com"
+    },
+    {
+        isim:"Deniz Restoran",
+        kategori:"Restorant",
+        aciklama:"Deniz ürünleri",
+        link:"https://example.com"
+    },
+    {
+        isim:"Mabel Emlak",
+        kategori:"Emlak",
+        aciklama:"Kiralık,Satılık ilanlar",
+        link:"http://Mabelmarmaris.com"
+    },
+    {
+        isim:"Mavi Otel",
+        kategori:"Otel",
+        aciklama:"Deniz manzaralı otel",
+        link:"https://example.com"
+    },
+     {
+        isim:"Deniz feneri",
+        kategori:"Yardım Kuruluşlar",
+        aciklama:"insani yardım kuruluşlar topluluğu",
+        link:"https://www.denizfeneri.org.tr/"
+    },
+     {
+        isim:"PitaLand",
+        kategori:"Restuarant",
+        aciklama:"Mideast Urban Kitchen",
+        link:"https://www.pitaland.ca"
+    },
+    {
+        isim:"Hercules Tekne",
+        kategori:"Tekne",
+        aciklama:"Marmaris tekne turu",
+        link:"https://www.herculesmarmaris.com"
+    }
+    
+];
+
+const cards = document.getElementById("cards");
+const search = document.getElementById("search");
+const category = document.getElementById("category");
+
+function goster(liste){
+    cards.innerHTML = "";
+    
+    liste.forEach(item=>{
+        cards.innerHTML += `
+        <div class="card" onclick="window.open('${item.link}', '_blank')">
+            <h3>${item.isim}</h3>
+            <p>${item.aciklama}</p>
+            <small>${item.kategori}</small>
+        </div>
+        `;
+    });
+}
+
+goster(isletmeler);
+
+function filtrele(){
+    let aranan = search.value.toLowerCase();
+    let secilen = category.value;
+
+    let sonuc = isletmeler.filter(item=>{
+        return (
+            item.isim.toLowerCase().includes(aranan) &&
+            (secilen === "" || item.kategori === secilen)
+        );
+    });
+
+    goster(sonuc);
+}
+
+search.addEventListener("input", filtrele);
+category.addEventListener("change", filtrele);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Panel</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    margin:0;
+    background:#f0f2f5;
+}
+
+nav{
+    background:#111;
+    color:white;
+    padding:10px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+nav a{
+    color:white;
+    margin-right:15px;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+nav button{
+    background:#ef4444;
+    color:white;
+    border:none;
+    padding:5px 10px;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+/* Container */
+.container{
+    max-width:900px;
+    margin:30px auto;
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+
+h2, h3{
+    text-align:center;
+    margin-bottom:15px;
+}
+
+/* Form & Inputs */
+input, select, textarea, button{
+    padding:8px;
+    margin:5px 0;
+    width:100%;
+    border-radius:6px;
+    border:1px solid #ccc;
+    font-size:14px;
+}
+
+textarea{
+    resize:none;
+}
+
+button{
+    background:#0ea5e9;
+    cursor:pointer;
+    border:none;
+    color:white;
+    font-weight:bold;
+    transition:0.2s;
+}
+
+button:hover{
+    background:#0284c7;
+}
+
+/* Tablolar */
+.table-wrapper{
+    max-height:350px;
+    overflow-y:auto;
+    margin-top:20px;
+    border-radius:10px;
+    border:1px solid #ccc;
+}
+
+.table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+.table th, .table td{
+    padding:8px;
+    text-align:left;
+    border-bottom:1px solid #ddd;
+    font-size:14px;
+}
+
+.table th{
+    background:#f5f5f5;
+}
+
+.delete-btn{
+    background:#ef4444;
+    color:white;
+    border:none;
+    padding:5px 10px;
+    border-radius:6px;
+    cursor:pointer;
+    font-size:12px;
+}
+
+.delete-btn:hover{
+    background:#b91c1c;
+}
+
+/* LOGIN PANEL DAR */
+#loginPanel{
+    position:fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    background:rgba(0,0,0,0.85);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+}
+
+#loginBox{
+    background:white;
+    padding:30px 20px;
+    border-radius:12px;
+    width:300px;
+    text-align:center;
+    box-shadow:0 5px 15px rgba(0,0,0,0.2);
+}
+
+#loginBox h2{
+    color:#111;
+    margin-bottom:20px;
+    font-size:18px;
+}
+
+#loginBox input{
+    width:90%;
+    margin-bottom:10px;
+}
+
+#loginBox button{
+    width:50%;
+    padding:8px;
+    font-size:14px;
+}
+
+#loginBox button.iptal{
+    background:#ccc;
+    color:#111;
+    margin-top:5px;
+    width:50%;
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🔐 LOGIN DAR PANEL -->
+<div id="loginPanel">
+    <div id="loginBox">
+        <h2>Admin Giriş</h2>
+        <input type="password" id="sifre" placeholder="Şifre gir">
+        <br>
+        <button onclick="giris()">GİRİŞ</button>
+        <button class="iptal" onclick="loginIptal()">İptal</button>
+    </div>
+</div>
+
+<!-- NAV -->
+<nav>
+    <div>
+        <nav>
+    <a href="index.html">Ana Sayfa</a>     
+    
+    <a href="iletisim.html">İletişim</a>
+    </div>
+    <button onclick="cikis()">Çıkış</button>
+</nav>
+
+<div class="container">
+    <h2>Admin Panel - İşletme Yönetimi</h2>
+
+    <h3>Yeni İşletme Ekle</h3>
+    <form id="addForm">
+        <input type="text" id="isim" placeholder="İşletme İsmi" required>
+        <select id="kategori" required>
+            <option value="">Kategori</option>
+            <option>Restoran</option>
+            <option>Kuaför</option>
+            <option>Emlak</option>
+            <option>Otel</option>
+            <option>Tekne</option>
+        </select>
+        <input type="text" id="link" placeholder="https://site.com" required>
+        <textarea id="aciklama" placeholder="Açıklama" rows="2" required></textarea>
+        <button type="submit">Ekle</button>
+    </form>
+
+    <h3>İşletmeler</h3>
+    <div class="table-wrapper">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>İsim</th>
+                    <th>Kategori</th>
+                    <th>Açıklama</th>
+                    <th>Link</th>
+                    <th>Sil</th>
+                </tr>
+            </thead>
+            <tbody id="liste"></tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+// 🔐 ŞİFRE
+const dogruSifre = "12345";
+
+function giris(){
+    let sifre = document.getElementById("sifre").value;
+    if(sifre === dogruSifre){
+        document.getElementById("loginPanel").style.display = "none";
+        localStorage.setItem("admin","true");
+    } else {
+        alert("Şifre yanlış!");
+    }
+}
+
+function loginIptal(){
+    document.getElementById("loginPanel").style.display = "none";
+}
+
+function cikis(){
+    localStorage.removeItem("admin");
+    location.reload();
+}
+
+// otomatik giriş
+if(localStorage.getItem("admin") === "true"){
+    document.getElementById("loginPanel").style.display = "none";
+}
+
+// VERİ
+let isletmeler = JSON.parse(localStorage.getItem("isletmeler")) || [];
+
+// GÖSTER
+function goster(){
+    let alan = document.getElementById("liste");
+    alan.innerHTML = "";
+    isletmeler.forEach((i,index)=>{
+        alan.innerHTML += `
+        <tr>
+            <td>${i.isim}</td>
+            <td>${i.kategori}</td>
+            <td>${i.aciklama}</td>
+            <td><a href="${i.link}" target="_blank">Git</a></td>
+            <td><button class="delete-btn" onclick="sil(${index})">Sil</button></td>
+        </tr>`;
+    });
+}
+
+// EKLE
+document.getElementById("addForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    let link = document.getElementById("link").value.trim();
+    if(!link.startsWith("http")) link = "https://" + link;
+
+    let yeni = {
+        isim: document.getElementById("isim").value,
+        kategori: document.getElementById("kategori").value,
+        aciklama: document.getElementById("aciklama").value,
+        link
+    };
+    isletmeler.push(yeni);
+    localStorage.setItem("isletmeler",JSON.stringify(isletmeler));
+    goster();
+    this.reset();
+});
+
+// SİL
+function sil(index){
+    if(confirm("Silmek istediğine emin misin?")){
+        isletmeler.splice(index,1);
+        localStorage.setItem("isletmeler",JSON.stringify(isletmeler));
+        goster();
+    }
+}
+
+goster();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JobGuide World & Dünya iş Rehberi</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins', sans-serif;
+}
+
+body{
+    background:#0f172a;
+    color:white;
+}
+
+/* NAVBAR */
+nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 8%;
+    background:rgba(0,0,0,0.4);
+}
+
+nav h1{
+    font-size:24px;
+    color:#38bdf8;
+}
+
+nav ul{
+    list-style:none;
+    display:flex;
+    gap:20px;
+}
+
+nav a{
+    text-decoration:none;
+    color:white;
+    transition:0.3s;
+}
+
+nav a:hover{
+    color:#38bdf8;
+}
+
+/* HERO */
+.hero{
+    height:90vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:20px;
+}
+
+.hero h2{
+    font-size:40px;
+    margin-bottom:15px;
+}
+
+.hero p{
+    color:#cbd5e1;
+    margin-bottom:25px;
+}
+
+.hero button{
+    padding:12px 25px;
+    border:none;
+    border-radius:8px;
+    background:#38bdf8;
+    color:black;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.hero button:hover{
+    background:#0ea5e9;
+}
+
+/* KARTLAR */
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(250px,1fr));
+    gap:20px;
+    padding:50px 8%;
+}
+
+.card{
+    background:#1e293b;
+    padding:20px;
+    border-radius:12px;
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+}
+
+.card h3{
+    margin-bottom:10px;
+}
+
+/* FOOTER */
+footer{
+    text-align:center;
+    padding:20px;
+    background:#020617;
+    color:#94a3b8;
+}
+</style>
+
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+    <h1>Dünya iş Rehberi & JobGuide World</h1>
+    <ul>
+        
+    </ul>
+</nav>
+<nav>
+    <a href="index.html">Ana Sayfa/ Home</a>
+    <a href="isletmeler.html">İşletmeler/Businesses</a>
+    <a href="reklam.html">Reklam Ver/Advertise</a>
+    <a href="İletişim.html">İletişim/ Contact</a>
+    <a href="bilboardPanel.html">bilboardPanel/</a>
+    <a href="admin.html">Admin Panel</a>
+   
+
+</nav>
+<!-- HERO -->
+<section class="hero">
+    <div>
+        <h2>Türkiye ve dünyadaki iş yerleri keşfet
+      </h2>
+      <h2>Discover businesses in Turkey and around the world</h2>
+        <p>İşletmeni ekle, müşterilere ulaş ve büyümeye başla</p>
+         <p>Add your business, reach out on time, and start growing!</p>
+
+        <button>Hemen Başla</button>
+    </div>
+</section>
+
+<!-- KARTLAR -->
+<section class="cards">
+    <div class="card">
+        <h3>Restoranlar</h3>
+        <p>En iyi restoranları keşfet</p>
+    </div>
+    <div class="card">
+        <h3>Kafeler</h3>
+        <p>Sicak, Soguk içecekler ve uygun fiyat secimleri</p>
+    </div>
+     <div class="card">
+        <h3>Yardım Kuruluşlar</h3>
+        <p> Güvenli,Güvenir Yardım Hizmetleri </p>
+    </div>
+
+    <div class="card">
+        <h3>Emlak</h3>
+        <p>Ev ve arsa ilanları</p>
+    </div>
+     <div class="card">
+        <h3>Alış veriş Magzaları</h3>
+        <p>En ugun ve kaliteli ürünler  için seçenekler</p>
+    </div>
+
+    <div class="card">
+        <h3>Kuaförler</h3>
+        <p>Yakındaki kuaförleri bul</p>
+    </div>
+
+    <div class="card">
+        <h3>Tekne Turları</h3>
+        <p>Tatil için en iyi seçenekler</p>
+    </div>
+     <div class="card">
+        <h3>Oteller</h3>
+        <p>Tatil için en iyi seçenekler</p>
+    </div>
+    <div class="card">
+        <h3>İnşaat Fİrması</h3>
+        <p>Yakındaki insaat firması bul</p>
+    </div>
+    
+</section>
+
+<!-- FOOTER -->
+<footer>
+    © 2026 JobGuide World & Türkiye İş Rehberi - Tüm Hakları Saklıdır
+</footer>
+
+</body>
+</html>

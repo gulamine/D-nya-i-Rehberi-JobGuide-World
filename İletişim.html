@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>İletişim</title>
+
+<style>
+body{
+    font-family:Arial;
+    margin:0;
+    background:#f5f5f5;
+}
+
+nav{
+    background:black;
+    color:white;
+    padding:15px;
+}
+
+nav a{
+    color:white;
+    margin-right:15px;
+    text-decoration:none;
+}
+
+.container{
+    max-width:500px;
+    margin:50px auto;
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.2);
+}
+
+.container h2{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+input, select, textarea, button{
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+    border-radius:5px;
+    border:1px solid #ccc;
+}
+
+button{
+    background:#38bdf8;
+    color:black;
+    font-weight:bold;
+    cursor:pointer;
+    border:none;
+}
+
+button:hover{
+    background:#0ea5e9;
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <a href="index.html">Ana Sayfa</a>
+    <a href="isletmeler.html">İşletmeler</a>
+    <a href="reklam.html">Reklam Ver</a>
+     <a href="bilboardPanel.html">bilboardPanel/</a>
+    <a href="iletisim.html">İletişim</a>
+
+</nav>
+
+ <body>
+    
+
+
+<section id="iletisim" style="padding: 40px; max-width: 600px; margin: auto; text-align:center;">
+  <h2>İletişim</h2>
+
+  <!-- İletişim Formu -->
+  <form id="contactForm" style="display:flex; flex-direction:column; gap:15px; margin-bottom:20px;">
+    <input type="text" name="name" placeholder="Adınız" required style="padding:10px; font-size:16px;">
+    <input type="email" name="email" placeholder="E-posta" required style="padding:10px; font-size:16px;">
+    <textarea name="message" placeholder="Mesajınız" required rows="5" style="padding:10px; font-size:16px;"></textarea>
+    <button type="submit" style="padding:10px; font-size:16px; cursor:pointer; background-color:#4CAF50; color:white; border:none;">Gönder</button>
+  </form>
+  <p id="formMessage" style="color:green; display:none;">Mesajınız gönderildi!</p>
+
+  <!-- Diğer İletişim Bilgileri -->
+  <div style="margin-top:30px; display:flex; flex-direction:column; gap:10px; font-size:18px;">
+    <a href="tel:+905384450648" style="text-decoration:none; color:black;"><i class="fa fa-phone"></i> Telefon: +90 538 445 06 48</a>
+    <a href="https://wa.me/905384450648" target="_blank" style="text-decoration:none; color:green;"><i class="fa fa-whatsapp"></i> WhatsApp</a>
+    <a href="jobguideworld.com" style="text-decoration:none; color:red;"><i class="fa fa-envelope"></i> Gmail</a>
+    <a href="https://www.instagram.com @jobguideworld/" target="_blank" style="text-decoration:none; color:#C13584;"><i class="fa fa-instagram"></i> Instagram</a>
+  </div>
+</section>
+<!-- İLETİŞİM BÖLÜMÜ BİTİŞ -->
+
+<!-- JS -->
+<script>
+  const form = document.getElementById('contactForm');
+  const formMessage = document.getElementById('formMessage');
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const formData = new FormData(form);
+    // Gerçek e-posta göndermek için backend gereklidir.
+    formMessage.style.display = 'block';
+    form.reset();
+  });
+</script>
+</body>
+</html>
