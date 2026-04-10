@@ -169,7 +169,7 @@ button:hover{
     }
 
     nav a{
-        font-size:13px;
+        font-size:10px;
     }
     .table th, .table td{
         font-size:12px;
@@ -208,19 +208,23 @@ button:hover{
 </nav>
 
 <div class="container">
-    <h2>Admin Panel - İşletme Yönetimi</h2>
+    <h2>Admin Panel - İsletme Yönetimi</h2>
 
     <h3>Yeni İşletme Ekle</h3>
     <form id="addForm">
-        <input type="text" id="isim" placeholder="İşletme İsmi" required>
+        <input type="text" id="isim" placeholder="İsletme İsmi" required>
         <select id="kategori" required>
             <option value="">Kategori</option>
-            <option>Restoran</option>
-            <option>Kuaför</option>
-            <option>Emlak</option>
-            <option>Otel</option>
-            <option>Tekne</option>
-        </select>
+            <option>Restoranlar</option>
+            <option>Kafeler</option>
+            <option>Kuaförler</option>
+            <option>Emlak ve Gayrimenkul</option>
+            <option>Otel,Motel,Apart</option>
+            <option>Tekne Turları</option>
+            <option>İnşaat Fİrması</option>
+            <option>Yardım Kuruluşlar</option>
+            <option>Diğerleri</option>
+        </select> 
         <input type="text" id="link" placeholder="https://site.com" required>
         <textarea id="aciklama" placeholder="Açıklama" rows="2" required></textarea>
         <button type="submit">Ekle</button>

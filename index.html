@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JobGuide World & Dünya iş Rehberi</title>
+<title> Dünya iş Rehberi & JobGuide World</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
@@ -17,7 +17,7 @@
 
 body{
     background:#0f172a;
-    color:white;
+    color:white
 }
 
 /* NAVBAR */
@@ -30,7 +30,7 @@ nav{
 }
 
 nav h1{
-    font-size:24px;
+    font-size:30px;
     color:#38bdf8;
 }
 
@@ -61,7 +61,7 @@ nav a:hover{
 }
 
 .hero h2{
-    font-size:40px;
+    font: size 26px;px;
     margin-bottom:15px;
 }
 
@@ -147,7 +147,7 @@ footer{
 </nav>
 <nav>
     <a href="index.html">Ana Sayfa/ Home</a>
-    <a href="isletmeler.html">İşletmeler/Businesses</a>
+    <a href="isletmeler.html">İsletmeler/Businesses</a>
     <a href="reklam.html">Reklam Ver/Advertise</a>
     <a href="İletişim.html">İletişim/ Contact</a>
     <a href="bilboardPanel.html">bilboardPanel/</a>
@@ -164,58 +164,85 @@ footer{
         <p>İşletmeni ekle, müşterilere ulaş ve büyümeye başla</p>
          <p>Add your business, reach out on time, and start growing!</p>
 
-        <button>Hemen Başla</button>
+        <button onclick="window.location.href='reklam.html'">
+  Hemen Başla
+</button>
     </div>
 </section>
 
 <!-- KARTLAR -->
 <section class="cards">
-    <div class="card">
+    <div class="card" onclick="kategoriGoster('Restoranlar')">
         <h3>Restoranlar</h3>
         <p>En iyi restoranları keşfet</p>
     </div>
-    <div class="card">
+    <div class="card" onclick="kategoriGoster('Kafeler')">
         <h3>Kafeler</h3>
         <p>Sicak, Soguk içecekler ve uygun fiyat secimleri</p>
     </div>
-     <div class="card">
+     <div class="card" onclick="kategoriGoster('Yardım Kuruluşlar')">
         <h3>Yardım Kuruluşlar</h3>
         <p> Güvenli,Güvenir Yardım Hizmetleri </p>
     </div>
 
-    <div class="card">
+    <div class="card" onclick="kategoriGoster('Emlak')">
         <h3>Emlak</h3>
         <p>Ev ve arsa ilanları</p>
     </div>
-     <div class="card">
-        <h3>Alış veriş Magzaları</h3>
+     <div class="card" onclick="kategoriGoster('Aliş veriş Mağzaları')">
+        <h3>Aliş veriş Mağzaları</h3>
         <p>En ugun ve kaliteli ürünler  için seçenekler</p>
     </div>
 
-    <div class="card">
+    <div class="card" onclick="kategoriGoster('Kuaförler')">
         <h3>Kuaförler</h3>
-        <p>Yakındaki kuaförleri bul</p>
+        <p>Yakındaki bay, bayan kuaförleri bul</p>
     </div>
 
-    <div class="card">
+    <div class="card" onclick="kategoriGoster('Tekne Turları')">
         <h3>Tekne Turları</h3>
         <p>Tatil için en iyi seçenekler</p>
     </div>
-     <div class="card">
-        <h3>Oteller</h3>
+     <div class="card" onclick="kategoriGoster('Otel,Motel,Apart')">
+        <h3>Otel,Motel,Apart</h3>
         <p>Tatil için en iyi seçenekler</p>
     </div>
-    <div class="card">
+    <div class="card" onclick="kategoriGoster('İnşaat Fİrması')">
         <h3>İnşaat Fİrması</h3>
         <p>Yakındaki insaat firması bul</p>
     </div>
-    
-</section>
-
+    <div id="sonuc" style="padding:20px;"></div>
 <!-- FOOTER -->
+ </section>
 <footer>
     © 2026 JobGuide World & Türkiye İş Rehberi - Tüm Hakları Saklıdır
 </footer>
+<script>
+function kategoriGoster(kategori){
+    let tum = JSON.parse(localStorage.getItem("isletmeler")) || [];
 
+    let filtre = tum.filter(i => i.kategori === kategori);
+
+    let alan = document.getElementById("sonuc");
+    alan.innerHTML = "";
+
+    if(filtre.length === 0){
+        alan.innerHTML = "<p>Bu kategoride isletme yok</p>";
+        return;
+    }
+
+    filtre.forEach(i=>{
+        alan.innerHTML += `
+        <div style="background:#1e293b; padding:15px; margin:10px; border-radius:10px;">
+            <h3>${i.isim}</h3>
+            <p>${i.aciklama}</p>
+            <a href="${i.link}" target="_blank" style="color:#38bdf8;">Siteye Git</a>
+        </div>
+        `;
+    });
+
+    alan.scrollIntoView({behavior:"smooth"});
+}
+</script>
 </body>
 </html>

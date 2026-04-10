@@ -64,7 +64,7 @@ button:hover{
     }
 
     nav a{
-        font-size:13px;
+        font-size:10px;
     }
     .table th, .table td{
         font-size:12px;
@@ -92,16 +92,21 @@ button:hover{
 <div class="container">
     <h2>Reklam Ver</h2>
     <form id="reklamForm">
-        <input type="text" id="isim" placeholder="İşletme İsmi" required>
+        <input type="text" id="isim" placeholder="İsletme İsmi" required>
         <select id="kategori" required>
             <option value="">Kategori Seçin</option>
-            <option value="Restoran">Restoran</option>
-            <option value="Kuaför">Kuaför</option>
+            <option value="Restoranlar">Restoranlar</option>
+            <option value="Kafeler">Kafeler</option>
+            <option value="Kuaförler">Kuaförler</option>
             <option value="Emlak">Emlak</option>
-            <option value="Otel">Otel</option>
-            <option value="Tekne">Tekne</option>
+            <option value="Otel,Motel,Apart">Otel,Motel,Apart</option>
+            <option value="Tekne Turları">Tekne Turları</option>
+            <option value="İnsaat Fİrması">İnsaat Fİrması</option>
+            <option value="Yardım Kuruluşlar">Yardım Kuruluşlar</option>
+            <option value="Diğerleri">Diğerleri</option>
         </select>
         <input type="text" id="link" placeholder="Web Site Linki (https://)" required>
+        <input type="text" id="link" placeholder="Web Site Linki (http://)" required>
         <textarea id="aciklama" placeholder="Açıklama" required></textarea>
         <button type="submit">Gönder</button>
     </form>

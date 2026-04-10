@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>İşletmeler</title>
+<title>İsletmeler</title>
 
 <style>
 body{
@@ -60,7 +60,7 @@ input, select{
     }
 
     nav a{
-        font-size:13px;
+        font-size:10px;
     }
     .table th, .table td{
         font-size:12px;
@@ -78,25 +78,26 @@ input, select{
 
 <nav>
     <a href="index.html">Ana Sayfa</a>
-    <a href="isletmeler.html">İşletmeler</a>
+    <a href="isletmeler.html">İsletmeler</a>
     <a href="#">Reklam Ver</a>
      <a href="bilboardPanel.html">bilboardPanel/</a>
     <a href="#">İletişim</a>
 </nav>
 
 <div class="controls">
-    <input type="text" id="search" placeholder="İşletme ara...">
+    <input type="text" id="search" placeholder="İsletme ara...">
     
     <select id="category">
         <option value="">Tüm Kategoriler</option>
-        <option value="Restoran">Restoran</option>
-        <option value="Kuaför">Kuaför</option>
+        <option value="Restoranlar">Restoranlar</option>
+        <option value="Kuaförler">Kuaförler</option>
         <option value="Emlak">Emlak</option>
-        <option value="Otel">Otel</option>
-        <option value="Tekne">Tekne</option>
-        <option value="Kafe">Kafe</option>
-        <option value="insaat">işaat</option>
-        
+        <option value="Otel,Motel,Apart">Otel,Motel,Apart</option>
+        <option value="Tekne Turları">Tekne Turları</option>
+        <option value="Kafeler">Kafeler</option>
+        <option value="İnşaat Fİrması">İnşaat Fİrması</option>
+        <option value="Yardım Kuruluşlar">Yardım Kuruluşlar</option>
+        <option value="Diğerleri">Diğerleri</option>
 
     </select>
 </div>
@@ -106,26 +107,26 @@ input, select{
 <script>
 const isletmeler = [
     {
-        isim:"Ali Kuaför",
-        kategori:"Kuaför",
+        isim:"AliKuaför",
+        kategori:"Kuaförler",
         aciklama:"Saç kesimi ve bakım",
         link:"https://example.com"
     },
     {
-        isim:"Deniz Restoran",
-        kategori:"Restorant",
+        isim:"Deniz Restorant",
+        kategori:"Restoranlar",
         aciklama:"Deniz ürünleri",
         link:"https://example.com"
     },
     {
-        isim:"Mabel Emlak",
+         isim:"MabelEmlak",
         kategori:"Emlak",
         aciklama:"Kiralık,Satılık ilanlar",
         link:"http://Mabelmarmaris.com"
     },
     {
         isim:"Mavi Otel",
-        kategori:"Otel",
+        kategori:"Otel,Motel,Apart",
         aciklama:"Deniz manzaralı otel",
         link:"https://example.com"
     },
@@ -137,18 +138,21 @@ const isletmeler = [
     },
      {
         isim:"PitaLand",
-        kategori:"Restuarant",
+        kategori:"Restoranlar",
         aciklama:"Mideast Urban Kitchen",
         link:"https://www.pitaland.ca"
     },
     {
         isim:"Hercules Tekne",
-        kategori:"Tekne",
+        kategori:"Tekne Turları",
         aciklama:"Marmaris tekne turu",
         link:"https://www.herculesmarmaris.com"
     }
     
 ];
+// 🔥 EKLEDİĞİM SATIR
+localStorage.setItem("isletmeler", JSON.stringify(isletmeler));
+
 
 const cards = document.getElementById("cards");
 const search = document.getElementById("search");
@@ -169,20 +173,16 @@ function goster(liste){
 }
 
 goster(isletmeler);
+let sonuc = isletmeler.filter(item=>{
+    return (
+        item.isim.toLowerCase().includes(aranan) &&
+        (secilen === "" || item.kategori.toLowerCase().includes(secilen.toLowerCase()))
+    );
+});
 
-function filtrele(){
-    let aranan = search.value.toLowerCase();
-    let secilen = category.value;
 
-    let sonuc = isletmeler.filter(item=>{
-        return (
-            item.isim.toLowerCase().includes(aranan) &&
-            (secilen === "" || item.kategori === secilen)
-        );
-    });
 
     goster(sonuc);
-}
 
 search.addEventListener("input", filtrele);
 category.addEventListener("change", filtrele);
