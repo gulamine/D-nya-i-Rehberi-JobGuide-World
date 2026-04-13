@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title> Dünya iş Rehberi & JobGuide World</title>
+<title>Dünya iş Rehberi & JobGuide World</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
@@ -17,60 +17,59 @@
 
 body{
     background:#0f172a;
-    color:white
+    color:white;
 }
 
 /* NAVBAR */
 nav{
     display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:20px 8%;
-    background:rgba(0,0,0,0.4);
-}
-
-nav h1{
-    font-size:30px;
-    color:#38bdf8;
-}
-
-nav ul{
-    list-style:none;
-    display:flex;
+    justify-content:center;
     gap:20px;
+    padding:15px;
+    background:rgba(0,0,0,0.7);
 }
 
 nav a{
-    text-decoration:none;
     color:white;
-    transition:0.3s;
+    text-decoration:none;
 }
 
-nav a:hover{
-    color:#38bdf8;
-}
-
-/* HERO */
+/* HERO (ARKA PLANLI KISIM) */
 .hero{
-    height:90vh;
+    height:100vh;
+    background:url("img/banner.jpg") no-repeat center center/cover;
+    position:relative;
+}
+
+.overlay{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    
+    background:rgba(0,0,0,0.6);
+
     display:flex;
+    flex-direction:column;
     justify-content:center;
     align-items:center;
     text-align:center;
+
     padding:20px;
 }
 
-.hero h2{
-    font: size 26px;px;
-    margin-bottom:15px;
+.overlay h2{
+    font-size:30px;
+    margin-bottom:10px;
 }
 
-.hero p{
-    color:#cbd5e1;
-    margin-bottom:25px;
+.overlay p{
+    margin-bottom:10px;
+    color:#ddd;
 }
 
-.hero button{
+button{
     padding:12px 25px;
     border:none;
     border-radius:8px;
@@ -78,11 +77,6 @@ nav a:hover{
     color:black;
     font-weight:bold;
     cursor:pointer;
-    transition:0.3s;
-}
-
-.hero button:hover{
-    background:#0ea5e9;
 }
 
 /* KARTLAR */
@@ -97,15 +91,11 @@ nav a:hover{
     background:#1e293b;
     padding:20px;
     border-radius:12px;
-    transition:0.3s;
+    cursor:pointer;
 }
 
 .card:hover{
     transform:translateY(-5px);
-}
-
-.card h3{
-    margin-bottom:10px;
 }
 
 /* FOOTER */
@@ -113,60 +103,43 @@ footer{
     text-align:center;
     padding:20px;
     background:#020617;
-    color:#94a3b8;
+    
 }
-@media (max-width:600px){
-    nav{
-        flex-direction:column;
-        align-items:flex-start;
-    }
-
-    nav a{
-        font-size:13px;
-    }
-    .table th, .table td{
-        font-size:12px;
-        padding:6px;
-    }
-
-    #loginBox{
-        padding:20px 15px;
-    }
-    }
+@media (max-width:600px)
+{ nav{ flex-direction:column;
+ align-items:flex-start; } 
+ nav a{ font-size:13px; } 
+ .table th, .table td
+ { font-size:12px; padding:6px; }
+  #loginBox{ padding:20px 15px; } } 
 </style>
-
 </head>
+
 <body>
 
-<!-- NAVBAR -->
+<!-- MENÜ -->
 <nav>
-    <h1>Dünya iş Rehberi & JobGuide World</h1>
-    <ul>
-        
-    </ul>
-</nav>
-<nav>
-    <a href="index.html">Ana Sayfa/ Home</a>
+   <a href="index.html">Ana Sayfa/ Home</a>
     <a href="isletmeler.html">İsletmeler/Businesses</a>
-    <a href="reklam.html">Reklam Ver/Advertise</a>
-    <a href="İletişim.html">İletişim/ Contact</a>
-    <a href="bilboardPanel.html">bilboardPanel/</a>
-    <a href="admin.html">Admin Panel</a>
-   
-
+     <a href="reklam.html">Reklam Ver/Advertise</a> 
+     <a href="İletişim.html">İletişim/ Contact</a> 
+     <a href="bilboardPanel.html">bilboardPanel/</a>
+      <a href="admin.html">Admin Panel</a> </nav>
 </nav>
 <!-- HERO -->
 <section class="hero">
-    <div>
-        <h2>Türkiye ve dünyadaki iş yerleri keşfet
-      </h2>
-      <h2>Discover businesses in Turkey and around the world</h2>
+    <div class="overlay">
+
+        <h2>Türkiye ve dünyadaki iş yerleri keşfet</h2>
+        <h2>Discover businesses in Turkey and around the world</h2>
+
         <p>İşletmeni ekle, müşterilere ulaş ve büyümeye başla</p>
-         <p>Add your business, reach out on time, and start growing!</p>
+        <p>Add your business and start growing!</p>
 
         <button onclick="window.location.href='reklam.html'">
-  Hemen Başla
-</button>
+            Hemen Başla
+        </button>
+
     </div>
 </section>
 
@@ -174,60 +147,80 @@ footer{
 <section class="cards">
     <div class="card" onclick="kategoriGoster('Restoranlar')">
         <h3>Restoranlar</h3>
-        <p>En iyi restoranları keşfet</p>
     </div>
-    <div class="card" onclick="kategoriGoster('Kafeler')">
-        <h3>Kafeler</h3>
-        <p>Sicak, Soguk içecekler ve uygun fiyat secimleri</p>
+    <div class="card" onclick="kategoriGoster('Cafeler')">
+        <h3>Cafeler</h3>
     </div>
-     <div class="card" onclick="kategoriGoster('Yardım Kuruluşlar')">
-        <h3>Yardım Kuruluşlar</h3>
-        <p> Güvenli,Güvenir Yardım Hizmetleri </p>
+    <div class="card" onclick="kategoriGoster('Otel Motel Apart')">
+        <h3>Otel,Motel,Apart</h3>
     </div>
-
-    <div class="card" onclick="kategoriGoster('Emlak')">
-        <h3>Emlak</h3>
-        <p>Ev ve arsa ilanları</p>
+    <div class="card" onclick="kategoriGoster('Camp Alanları')">
+        <h3>Camp Alanları</h3>
     </div>
-     <div class="card" onclick="kategoriGoster('Aliş veriş Mağzaları')">
-        <h3>Aliş veriş Mağzaları</h3>
-        <p>En ugun ve kaliteli ürünler  için seçenekler</p>
+     <div class="card" onclick="kategoriGoster('Spor Merkezleri')">
+        <h3>Spor Merkezleri<h3>
+    </div>
+    <div class="card" onclick="kategoriGoster('Veteriner Klinikleri')">
+        <h3>Veteriner Klinikleri<h3>
+    </div>
+    <div class="card" onclick="kategoriGoster('Seyhat Acentasi')">
+        <h3>Seyhat Acentasi<h3>
+    </div>
+    <div class="card" onclick="kategoriGoster('Özel Sigorta')">
+        <h3>Özel Sigorta<h3>
+    </div>
+    <div class="card" onclick="kategoriGoster('En Uygun Araç Kiralama')">
+        <h3>En Uygun Araç Kiralama</h3>
     </div>
 
     <div class="card" onclick="kategoriGoster('Kuaförler')">
         <h3>Kuaförler</h3>
-        <p>Yakındaki bay, bayan kuaförleri bul</p>
+    </div>
+    <div class="card" onclick="kategoriGoster('Klinikler')">
+        <h3>Klinikler</h3>
+    </div>
+    <div class="card" onclick="kategoriGoster('Yardım Kuruluşları')">
+        <h3>Yardım Kuruluşları</h3>
+    </div>
+    <div class="card" onclick="kategoriGoster('Özel Okullar')">
+        <h3>Özel Okullar</h3>
+          </div>
+    <div class="card" onclick="kategoriGoster('Emlak')">
+        <h3>Emlak</h3>
+    </div>
+    <div class="card" onclick="kategoriGoster('İnşaat Firmasi')">
+        <h3>İnşaat Firması
+        </h3>
+    </div>
+    <div class="card" onclick="kategoriGoster('Al,Ş Veriş Mağzalrı')">
+        <h3>Aliş Veriş Mğzaları</h3>
     </div>
 
+    </div>
     <div class="card" onclick="kategoriGoster('Tekne Turları')">
         <h3>Tekne Turları</h3>
-        <p>Tatil için en iyi seçenekler</p>
     </div>
-     <div class="card" onclick="kategoriGoster('Otel,Motel,Apart')">
-        <h3>Otel,Motel,Apart</h3>
-        <p>Tatil için en iyi seçenekler</p>
-    </div>
-    <div class="card" onclick="kategoriGoster('İnşaat Fİrması')">
-        <h3>İnşaat Fİrması</h3>
-        <p>Yakındaki insaat firması bul</p>
-    </div>
-    <div id="sonuc" style="padding:20px;"></div>
-<!-- FOOTER -->
- </section>
+    
+<div class="card" onclick="kategoriGoster('Diğerleri')">
+        <h3>Diğerleri</h3>
+</section>
+
+<div id="sonuc"></div>
+
 <footer>
-    © 2026 JobGuide World & Türkiye İş Rehberi - Tüm Hakları Saklıdır
+© 2026 JobGuide World
 </footer>
+
 <script>
 function kategoriGoster(kategori){
     let tum = JSON.parse(localStorage.getItem("isletmeler")) || [];
-
     let filtre = tum.filter(i => i.kategori === kategori);
 
     let alan = document.getElementById("sonuc");
     alan.innerHTML = "";
 
     if(filtre.length === 0){
-        alan.innerHTML = "<p>Bu kategoride isletme yok</p>";
+        alan.innerHTML = "<p>Bu kategoride işletme yok</p>";
         return;
     }
 
@@ -236,13 +229,12 @@ function kategoriGoster(kategori){
         <div style="background:#1e293b; padding:15px; margin:10px; border-radius:10px;">
             <h3>${i.isim}</h3>
             <p>${i.aciklama}</p>
-            <a href="${i.link}" target="_blank" style="color:#38bdf8;">Siteye Git</a>
+            <a href="${i.link}" target="_blank">Siteye Git</a>
         </div>
         `;
     });
-
-    alan.scrollIntoView({behavior:"smooth"});
 }
 </script>
+
 </body>
 </html>
