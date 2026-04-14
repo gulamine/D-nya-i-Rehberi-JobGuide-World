@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>İsletmeler</title>
+<title>İşletmeler</title>
 
 <style>
 body{
@@ -53,6 +53,13 @@ input, select{
 .card:hover{
     transform:scale(1.05);
 }
+
+.card a{
+    text-decoration:none;
+    font-weight:bold;
+    color:blue;
+}
+
 @media (max-width:600px){
     nav{
         flex-direction:column;
@@ -62,31 +69,23 @@ input, select{
     nav a{
         font-size:10px;
     }
-    .table th, .table td{
-        font-size:12px;
-        padding:6px;
-    }
-
-    #loginBox{
-        padding:20px 15px;
-    }
-    }
+}
 </style>
 </head>
 
 <body>
 
 <nav>
-    <a href="index.html">Ana Sayfa</a>
-    <a href="isletmeler.html">İsletmeler</a>
-    <a href="#">Reklam Ver</a>
-     <a href="bilboardPanel.html">bilboardPanel/</a>
-    <a href="#">İletişim</a>
+   <a href="index.html">Ana Sayfa</a>
+   <a href="isletmeler.html">İşletmeler</a>
+   <a href="reklam.html">Reklam Ver</a>
+   <a href="İletişim.html">İletişim</a>
+   <a href="admin.html">Admin</a>
 </nav>
 
 <div class="controls">
-    <input type="text" id="search" placeholder="İsletme ara...">
-    
+    <input type="text" id="search" placeholder="İşletme ara...">
+
     <select id="category">
         <option value="">Tüm Kategoriler</option>
         <option value="Restoranlar">Restoranlar</option>
@@ -98,94 +97,104 @@ input, select{
         <option value="İnşaat Fİrması">İnşaat Fİrması</option>
         <option value="Yardım Kuruluşlar">Yardım Kuruluşlar</option>
         <option value="Diğerleri">Diğerleri</option>
-
     </select>
 </div>
 
 <div class="cards" id="cards"></div>
 
 <script>
+
 const isletmeler = [
     {
-        isim:"AliKuaför",
-        kategori:"Kuaförler",
-        aciklama:"Saç kesimi ve bakım",
-        link:"https://example.com"
+        isim:"Bilal Gülmez",
+        kategori:"Diğerleri",
+        aciklama:"camiler dernegi başkanı",
+        link:"https://example.com",
+        instagram:"https://www.instagram.com/gulbilal06/"
     },
     {
-        isim:"Deniz Restorant",
+        isim:"Merkez Camileri Derneği",
+        kategori:"Yardım Kurulışları",
+        aciklama:"hizmet",
+        link:"",
+        instagram:"https://www.instagram.com/merkezcamileri/"
+          },
+    {
+        isim:"Restorant Pitaland",
         kategori:"Restoranlar",
-        aciklama:"Deniz ürünleri",
-        link:"https://example.com"
+        aciklama:"Orta Doğu Tat",
+        link:"https://www.pitaland.ca",
+        instagram:"https://www.instagram.com/pitaland.ca"
     },
     {
-         isim:"MabelEmlak",
+        isim:"Mabel Emlak",
         kategori:"Emlak",
-        aciklama:"Kiralık,Satılık ilanlar",
-        link:"http://Mabelmarmaris.com"
+        aciklama:"Kiralık ve satılık ilanlar",
+        link:"http://www.Mabelmarmaris.com",
+        instagram:"https://www.instagram.com/mabelmarmaris"
     },
     {
         isim:"Mavi Otel",
         kategori:"Otel,Motel,Apart",
         aciklama:"Deniz manzaralı otel",
-        link:"https://example.com"
-    },
-     {
-        isim:"Deniz feneri",
-        kategori:"Yardım Kuruluşlar",
-        aciklama:"insani yardım kuruluşlar topluluğu",
-        link:"https://www.denizfeneri.org.tr/"
-    },
-     {
-        isim:"PitaLand",
-        kategori:"Restoranlar",
-        aciklama:"Mideast Urban Kitchen",
-        link:"https://www.pitaland.ca"
+        link:"",
+        instagram:"https://instagram.com"
     },
     {
         isim:"Hercules Tekne",
         kategori:"Tekne Turları",
         aciklama:"Marmaris tekne turu",
-        link:"https://www.herculesmarmaris.com"
-    }
-    
-];
-// 🔥 EKLEDİĞİM SATIR
-localStorage.setItem("isletmeler", JSON.stringify(isletmeler));
-
+        link:"https://www.herculesmarmaris.com",
+        instagram:"https://instagram.com"
+    },
+   ]; // 🔥 EKLEDİĞİM SATIR localStorage.setItem("isletmeler", JSON.stringify(isletmeler));
 
 const cards = document.getElementById("cards");
 const search = document.getElementById("search");
 const category = document.getElementById("category");
 
+// 🔥 KART GÖSTER
 function goster(liste){
     cards.innerHTML = "";
-    
+
     liste.forEach(item=>{
         cards.innerHTML += `
-        <div class="card" onclick="window.open('${item.link}', '_blank')">
+        <div class="card">
             <h3>${item.isim}</h3>
             <p>${item.aciklama}</p>
             <small>${item.kategori}</small>
+
+            <div style="margin-top:10px;">
+                ${item.link ? `<a href="${item.link}" target="_blank">🌐 Web</a>` : ""}
+                ${item.instagram ? ` | <a href="${item.instagram}" target="_blank">📸 Instagram</a>` : ""}
+            </div>
         </div>
         `;
     });
 }
 
-goster(isletmeler);
-let sonuc = isletmeler.filter(item=>{
-    return (
-        item.isim.toLowerCase().includes(aranan) &&
-        (secilen === "" || item.kategori.toLowerCase().includes(secilen.toLowerCase()))
-    );
-});
+// 🔥 FİLTRE
+function filtrele(){
+    let aranan = search.value.toLowerCase();
+    let secilen = category.value;
 
-
+    let sonuc = isletmeler.filter(item=>{
+        return (
+            item.isim.toLowerCase().includes(aranan) &&
+            (secilen === "" || item.kategori === secilen)
+        );
+    });
 
     goster(sonuc);
+}
 
+// 🔥 EVENTLER
 search.addEventListener("input", filtrele);
 category.addEventListener("change", filtrele);
+
+// 🔥 İLK AÇILIŞ
+goster(isletmeler);
+
 </script>
 
 </body>

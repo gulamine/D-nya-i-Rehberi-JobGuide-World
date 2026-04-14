@@ -81,14 +81,13 @@ button:hover{
 <body>
 
 <nav>
-    <a href="index.html">Ana Sayfa</a>
-    <a href="isletmeler.html">İşletmeler</a>
-    <a href="reklam.html">Reklam Ver</a>
+   <a href="index.html">Ana Sayfa/ Home</a>
+    <a href="isletmeler.html">İsletmeler/Businesses</a>
+     <a href="reklam.html">Reklam Ver/Advertise</a> 
+     <a href="İletişim.html">İletişim/ Contact</a> 
      <a href="bilboardPanel.html">bilboardPanel/</a>
-    <a href="iletisim.html">İletişim</a>
-
+      <a href="admin.html">Admin Panel</a> </nav>
 </nav>
-
 <div class="container">
     <h2>Reklam Ver</h2>
     <form id="reklamForm">
@@ -105,32 +104,50 @@ button:hover{
             <option value="Yardım Kuruluşlar">Yardım Kuruluşlar</option>
             <option value="Diğerleri">Diğerleri</option>
         </select>
-        <input type="text" id="link" placeholder="Web Site Linki (https://)" required>
-        <input type="text" id="link" placeholder="Web Site Linki (http://)" required>
-        <textarea id="aciklama" placeholder="Açıklama" required></textarea>
-        <button type="submit">Gönder</button>
-    </form>
-</div>
+        <input type="text" id="link" placeholder="Web Site Linki (https://)">
+<input type="text" id="instagram" placeholder="Instagram Linki (https://)">
+<textarea id="aciklama" placeholder="Açıklama" required></textarea>
+<button type="submit">Gönder</button>
 
 <script>
-// Şimdilik sadece tarayıcıda gösteriyoruz
 document.getElementById("reklamForm").addEventListener("submit", function(e){
-    e.preventDefault();
+    e.preventDefault(); // 🔥 çok önemli
+
+    let link = document.getElementById("link").value.trim();
+    let instagram = document.getElementById("instagram").value.trim();
+
+    // 🔥 https düzeltme (ikisi için)
+    if(link !== "" && !link.startsWith("http")){
+        link = "https://" + link;
+    }
+
+    if(instagram !== "" && !instagram.startsWith("http")){
+        instagram = "https://" + instagram;
+    }
+
+    // 🔥 en az 1 zorunlu
+    if(link === "" && instagram === ""){
+        alert("Lütfen en az web sitesi veya Instagram giriniz!");
+        return;
+    }
 
     const isletme = {
         isim: document.getElementById("isim").value,
         kategori: document.getElementById("kategori").value,
-        link: document.getElementById("link").value,
+        link: link,               // 🔥 düzeltildi
+        instagram: instagram,     // 🔥 düzeltildi
         aciklama: document.getElementById("aciklama").value
     };
 
-    console.log("Yeni Reklam Verildi:", isletme);
-    alert("Form gönderildi! Admin panelden kontrol edebilirsiniz.");
+    // 🔥 localStorage kaydet
+    let eski = JSON.parse(localStorage.getItem("isletmeler")) || [];
+    eski.push(isletme);
+    localStorage.setItem("isletmeler", JSON.stringify(eski));
 
-    // Formu temizle
-    document.getElementById("reklamForm").reset();
+    console.log("Yeni Reklam:", isletme);
+    alert("Başarıyla eklendi!");
+
+    this.reset();
 });
 </script>
-
-</body>
-</html>
+</body> </html>
