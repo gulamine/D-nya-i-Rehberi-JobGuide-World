@@ -86,7 +86,7 @@ button:hover{
      <a href="reklam.html">Reklam Ver/Advertise</a> 
       <a href="bilboardPanel.html">bilboardPanel/</a>
      <a href="İletişim.html">İletişim/ Contact</a> 
-      <a href="admin.html">Admin Panel</a> </nav>
+    
 </nav>
 <div class="container">
     <h2>Reklam Ver</h2>
@@ -114,6 +114,12 @@ button:hover{
             <option value="Diğerleri">Diğerleri</option>
 
         </select>
+        <select id="paket" required>
+    <option value="">Reklam Paketi Seç</option>
+    <option value="200₺ - Normal">🟢 Normal (200₺)</option>
+    <option value="400₺ - Öne Çıkan">🔥 Öne Çıkan (400₺)</option>
+    <option value="600₺ - VIP">👑 VIP (600₺)</option>
+</select>
         <input type="text" id="link" placeholder="Web Site Linki (https://)">
 <input type="text" id="instagram" placeholder="Instagram Linki (https://)">
 <textarea id="aciklama" placeholder="Açıklama" required></textarea>
@@ -121,12 +127,15 @@ button:hover{
 
 <script>
 document.getElementById("reklamForm").addEventListener("submit", function(e){
-    e.preventDefault(); // 🔥 çok önemli
+    e.preventDefault();
 
+    let isim = document.getElementById("isim").value;
+    let kategori = document.getElementById("kategori").value;
     let link = document.getElementById("link").value.trim();
     let instagram = document.getElementById("instagram").value.trim();
+    let aciklama = document.getElementById("aciklama").value;
 
-    // 🔥 https düzeltme (ikisi için)
+    // https düzeltme
     if(link !== "" && !link.startsWith("http")){
         link = "https://" + link;
     }
@@ -135,27 +144,58 @@ document.getElementById("reklamForm").addEventListener("submit", function(e){
         instagram = "https://" + instagram;
     }
 
-    // 🔥 en az 1 zorunlu
     if(link === "" && instagram === ""){
-        alert("Lütfen en az web sitesi veya Instagram giriniz!");
+        alert("En az bir iletişim gir!");
+        return;
+    }
+    if(paket === ""){
+        alert("Lütfen paket seç!");
         return;
     }
 
-    const isletme = {
-        isim: document.getElementById("isim").value,
-        kategori: document.getElementById("kategori").value,
-        link: link,               // 🔥 düzeltildi
-        instagram: instagram,     // 🔥 düzeltildi
-        aciklama: document.getElementById("aciklama").value
-    };
+    // 🔥 SPAM KORUMA (60 saniye)
+    let sonGonderim = localStorage.getItem("sonGonderim");
+    let simdi = Date.now();
 
-    // 🔥 localStorage kaydet
-    let eski = JSON.parse(localStorage.getItem("isletmeler")) || [];
-    eski.push(isletme);
-    localStorage.setItem("isletmeler", JSON.stringify(eski));
+    if(sonGonderim && (simdi - sonGonderim < 60000)){
+        alert("Çok hızlı gönderiyorsun! 1 dakika bekle.");
+        return;
+    }
 
-    console.log("Yeni Reklam:", isletme);
-    alert("Başarıyla eklendi!");
+    localStorage.setItem("sonGonderim", simdi);
+
+    // 🔥 MESAJ
+    let mesaj = `📢 Yeni Reklam Talebi
+İşletme: ${isim}
+Kategori: ${kategori}
+Web: ${link}
+Instagram: ${instagram}
+Açıklama: ${aciklama}
+Tarih: ${new Date().toLocaleString()}
+⏳ Yayın Süresi: 30 Gün
+📌 Süre bitince kaldırılır.
+💰 Ödeme sonrası reklam yayına alınır.`;
+
+
+    // 🔥 NUMARA
+    let telefon = "905384450648";
+
+    let url = `https://wa.me/${telefon}?text=${encodeURIComponent(mesaj)}`;
+
+    // 🔥 GİZLİ KAYIT (senin tarayıcıda)
+    let kayitlar = JSON.parse(localStorage.getItem("basvurular")) || [];
+    kayitlar.push({
+        isim,
+        kategori,
+        link,
+        instagram,
+        aciklama,
+        tarih: new Date().toLocaleString()
+    });
+    localStorage.setItem("basvurular", JSON.stringify(kayitlar));
+
+    // WhatsApp aç
+    window.open(url, "_blank");
 
     this.reset();
 });
